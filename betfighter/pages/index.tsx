@@ -7,13 +7,12 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="http://thirdweb.com/">thirdweb</a>!
+          Welcome to <a href="http://thirdweb.com/">BETfighter</a>!
         </h1>
 
         <p className={styles.description}>
-          Get started by configuring your desired network in{" "}
-          <code className={styles.code}>pages/_app.tsx</code>, then modify the{" "}
-          <code className={styles.code}>pages/index.tsx</code> file!
+          The worlds first computer vision betting app for AAA fighting games.
+        
         </p>
 
         <div className={styles.connect}>
@@ -22,18 +21,16 @@ const Home: NextPage = () => {
 
         <div className={styles.grid}>
           <a href="https://portal.thirdweb.com/" className={styles.card}>
-            <h2>Portal &rarr;</h2>
+            <h2>Place your Bet Here &rarr;</h2>
             <p>
-              Guides, references and resources that will help you build with
-              thirdweb.
+              This is where you will place your initial Bet.
             </p>
           </a>
 
           <a href="https://thirdweb.com/dashboard" className={styles.card}>
-            <h2>Dashboard &rarr;</h2>
+            <h2>Choose Your Game &rarr;</h2>
             <p>
-              Deploy, configure and manage your smart contracts from the
-              dashboard.
+              We currently only support MK11.  Tekken and Street Fighter Coming S
             </p>
           </a>
 
@@ -41,10 +38,9 @@ const Home: NextPage = () => {
             href="https://portal.thirdweb.com/templates"
             className={styles.card}
           >
-            <h2>Templates &rarr;</h2>
+            <h2>Fighter 2 &rarr;</h2>
             <p>
-              Discover and clone template projects showcasing thirdweb features.
-            </p>
+See if your opponent is ready for battle.            </p>
           </a>
         </div>
       </main>
