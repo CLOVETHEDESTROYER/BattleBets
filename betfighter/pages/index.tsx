@@ -1,8 +1,29 @@
 import { ConnectWallet } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
+import { getData } from './api';
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+
+
+  
 
 const Home: NextPage = () => {
+
+  const [data, setData] = useState([{}])
+
+  useEffect(() => {
+    axios.get("/winner").then(
+      res => res.json()
+    ).then(
+      data => {
+        setData(data)
+        console.log(data);
+      }
+    )
+  }, [])
+  
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -43,9 +64,17 @@ const Home: NextPage = () => {
 See if your opponent is ready for battle.            </p>
           </a>
         </div>
+        <div>
+        <h1>Data from Flask backend:</h1>
+        <p>{JSON.stringify(data)}</p>
+        
+      </div>
       </main>
     </div>
   );
+ 
+  
 };
+
 
 export default Home;
