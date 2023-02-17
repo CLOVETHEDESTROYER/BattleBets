@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/security/Pausable.sol";
+//import "@openzeppelin/contracts/security/Pausable.sol";
 //import "@openzeppelin/contracts/access/Ownable.sol";
-import "@thirdweb-dev/contracts/extension/Ownable.sol";
-import "@thirdweb-dev/contracts/extension/Permissions.sol";
+//import "@thirdweb-dev/contracts/extension/Ownable.sol";
+//import "@thirdweb-dev/contracts/extension/Permissions.sol";
 
-contract openBet is Ownable, Permissions, Pausable {
+contract openBet {
     address payable custodialWallet;
     address payable payableOwner;
     address payable public owner;
@@ -28,7 +28,7 @@ contract openBet is Ownable, Permissions, Pausable {
     }
 
     //ownable function.  Change this to your wallet. 
-    function _canSetOwner() internal virtual view override returns (bool) {
+    function _canSetOwner() internal virtual view returns (bool) {
         return msg.sender == 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
     }
 

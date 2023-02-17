@@ -4,12 +4,19 @@ import styles from "../styles/Home.module.css";
 import { getData } from '/';
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import { useContract } from "@thirdweb-dev/react";
+
 
 
   
 
 const Home: NextPage = () => {
 
+  // While isLoading is true, contract is undefined.
+  const { contract, isLoading, error } = useContract("0x665ad964552493601c5EC81Bc12389a68D00f98A");
+  // Now you can use the contract in the rest of the component
+  console.log(contract)
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -37,7 +44,7 @@ const Home: NextPage = () => {
         </p>
 
         <div className={styles.connect}>
-          <ConnectWallet />
+          <ConnectWallet accentColor="#27cc53" />
         </div>
 
         <div className={styles.grid}>
