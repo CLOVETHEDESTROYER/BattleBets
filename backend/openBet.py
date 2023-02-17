@@ -9,6 +9,7 @@ app=Flask(__name__)
 #members API route
 @app.route('/')
 def winner():
+    print('winner')
     data = {'Winner': ["Member1", "Member2", "Member3", "CacaBallZ", "nalga"]}
     return jsonify(data)
 
