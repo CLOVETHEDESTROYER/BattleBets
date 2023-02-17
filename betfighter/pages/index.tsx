@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useContract, useContractWrite, useContractRead } from "@thirdweb-dev/react";
+import { testMonica } from "./api/openBet";
 
 
 
@@ -38,14 +39,10 @@ const Home: NextPage = () => {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    axios.get("/").then(
-      res => res.data
-    ).then(
-      data => {
-        setData(data)
-;
-      }
-    )
+    testMonica().then((test:any) => {
+      console.log("a response test", test)
+      setData(test)
+    })
   }, [])
   
 
