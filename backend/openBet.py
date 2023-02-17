@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 
 
@@ -7,9 +7,10 @@ app=Flask(__name__)
 
 
 #members API route
-@app.route('/winner')
+@app.route('/')
 def winner():
-    return {'Winner': ["Member1", "Member2", "Member3", "CacaBallZ", "nalga"]}
+    data = {'Winner': ["Member1", "Member2", "Member3", "CacaBallZ", "nalga"]}
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(port= 8000, debug=True)

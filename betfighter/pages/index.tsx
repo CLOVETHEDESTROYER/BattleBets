@@ -1,7 +1,7 @@
 import { ConnectWallet } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
-import { getData } from './api';
+import { getData } from '/';
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 
@@ -10,15 +10,15 @@ import React, { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
 
-  const [data, setData] = useState([{}])
+  const [data, setData] = useState({})
 
   useEffect(() => {
-    axios.get("/winner").then(
-      res => res.json()
+    axios.get("/").then(
+      res => res.data
     ).then(
       data => {
         setData(data)
-        console.log(data);
+;
       }
     )
   }, [])

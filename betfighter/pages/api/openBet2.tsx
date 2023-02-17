@@ -3,9 +3,11 @@ import axios from 'axios';
 
 
 export default async function handler(
+  req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const result = await axios.get('http://localhost:8000/winner');
+  const result = await axios.get('/');
+  console.log(req);
   res.status(200).json(result.data);
 }
 // export default async function handler(req, res) {
