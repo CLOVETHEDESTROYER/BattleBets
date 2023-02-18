@@ -53,7 +53,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="http://thirdweb.com/">BETfighter</a>!
+          Welcome to <a href="/">BETfighter</a>!
         </h1>
 
         <p className={styles.description}>
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
             <Web3Button
       contractAddress="0x665ad964552493601c5EC81Bc12389a68D00f98A"
       action={(contract) => {
-        contract.call("placeBet", _player)
+        contract.call("placeBet", _player1)
       }}
     >
       placeBet
@@ -102,8 +102,8 @@ const Home: NextPage = () => {
             <p>
             <input
                 type="text"
-                name="player1"
-                value={_player1}
+                name="player2"
+                value={_player2}
                 onChange={(e) => setPlayer(e.target.value)}
               />
               We currently only support MK11.  Tekken and Street Fighter Coming S
