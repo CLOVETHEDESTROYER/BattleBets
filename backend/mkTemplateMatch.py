@@ -1,13 +1,31 @@
 import cv2
 import numpy as np
 import os
+import json
+from flask import Flask
+
+
+
 
 # Load the image you want to detect
 template = cv2.imread('backend/assets/dots12.jpg', cv2.IMREAD_GRAYSCALE)
 w, h = template.shape[::-1]
 #template = cv2.resize(img,(20, 50), fx=1, fy=1)
 
-
+def Winner(Left, Right): 
+    # If the image was detected in region 1, return "Left Side Wins"
+    if max_val1 > .89: 
+        print("you Dad")
+        return Left 
+    # If the image was detected in region 2, return "Region 2"
+    elif max_val2 > .89:
+        print("you Mom") 
+        return Right
+        
+    # If the image was not detected in either region, return "Not found"
+    else: 
+        print("aint shit")
+        return "Not found"
 
 # Set up the video capture object
 cap = cv2.VideoCapture('backend/video/MK11video.mov', 0)
@@ -22,6 +40,8 @@ while True:
     ret, frame = cap.read()
     #toggle the below code to test image on both sides of fram
     frame = cv2.flip(frame, 1)
+
+    
 
     # If the frame was not grabbed, break
     if not ret:
@@ -56,6 +76,7 @@ while True:
     _, max_val2, _, _ = cv2.minMaxLoc(result2)
     print(max_val1, max_val2)
 
+
     # If the image was detected in region 1, draw a rectangle around it
     if max_val1 > .94068063:
         cv2.rectangle(frame, (322, 25), (422, 0), (0, 0, 255), 7)
@@ -63,16 +84,25 @@ while True:
     if max_val2 > .82:
         cv2.rectangle(frame, (480, 25), (580, 0), (255, 0, 0), 7)
 
-    # If the image was detected in region 1, return "Left Side Wins"
-    if max_val1 > .89:
-        print("LEFT SIDE WINS")
-    # If the image was detected in region 2, return "Region 2"
-    elif max_val2 > .89:
-        print("RIGHT SIDE WINS")
-    # If the image was not detected in either region, return "Not found"
-    else:
-        print("Not found")
 
+    # If the image was detected in region 1, return "Left Side Wins"
+    if max_val1 > .89: 
+        print ("LEFT SIDE WINS")  
+    # If the image was detected in region 2, return "Region 2"
+    elif max_val2 > .89: 
+        print ("RIGHT SIDE WINS") 
+    # If the image was not detected in either region, return "Not found"
+    else: 
+        print ("NOT FOUND")
+        
+
+    # Display the resulting frame
+    #def Winner():
+    # Your code to check for thresholds and find the winner here
+    #    winner = (if max_val1 > .89: "LEFT SIDE WINS" elif max_val2 > .89: "RIGHT SIDE WINS" else: "Not found")
+    # Return the winner output as a JSON response
+    #    return json.dumps({'winner': winner})
+    
 
     # these boxes are to calibrate the screen over the "victory dots" Uncomment to calibrate
     #imgOGL = cv2.rectangle(frame, (420, frame.shape[1]//2), (0,frame.shape[2]//40), (255, 0, 255), 2)
@@ -83,11 +113,17 @@ while True:
     imgL = cv2.rectangle(frame, (322, 25), (422, 0), (255, 0, 0), 5)
     imgR = cv2.rectangle(frame, (480, 25), (580, 0), (255, 255, 0), 5)
 
-    
+
+
+
+   
 
     # Show the frame
     cv2.imshow('Frame', frame)
     cv2.imshow('ROI', right)
+
+
+        
 
     # Check for user input
     if cv2.waitKey(1) == ord('q'):
@@ -95,3 +131,4 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
