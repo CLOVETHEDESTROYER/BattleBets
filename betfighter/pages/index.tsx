@@ -6,6 +6,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useContract, useContractWrite, useContractRead } from "@thirdweb-dev/react";
+import { testMonica } from "./api/openBet";
 
 
 
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
 
     const call = async () => {
       try {
-        const contractData = await placeBet([ _player ]);
+        const contractData = await placeBet([ _player1 ]);
         console.info("contract call successs", contractData);
       } catch (err) {
         console.error("contract call failure", err);
@@ -31,6 +32,8 @@ const Home: NextPage = () => {
 
   //const [id, setID] = useState("");
   const [_player1, setPlayer] = useState("");
+  const [player1, player1Bet] = useState("");
+  const [player2, player2Bet] = useState("");
   //const [playerId, setPlayerId] = useState("")
   //const [placeBet, setPlaceBet] = useState("")
   
@@ -38,14 +41,10 @@ const Home: NextPage = () => {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    axios.get("/").then(
-      res => res.data
-    ).then(
-      data => {
-        setData(data)
-;
-      }
-    )
+    testMonica().then((test:any) => {
+      console.log("a response test", test)
+      setData(test)
+    })
   }, [])
   
 
@@ -79,7 +78,7 @@ const Home: NextPage = () => {
             <p>
               This is where you will place your initial Bet.
               <input
-                type="text"
+                type="number"
                 name="player1"
                 value={_player1}
                 onChange={(e) => setPlayer(e.target.value)}
@@ -103,7 +102,7 @@ const Home: NextPage = () => {
             <input
                 type="text"
                 name="player2"
-                value={_player2}
+                value={player2}
                 onChange={(e) => setPlayer(e.target.value)}
               />
               We currently only support MK11.  Tekken and Street Fighter Coming S
