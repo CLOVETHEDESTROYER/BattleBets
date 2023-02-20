@@ -80,7 +80,7 @@ const Home: NextPage = () => {
               <input
                 type="number"
                 name="player1"
-                value={player1}
+                value={_player1}
                 onChange={(e) => setPlayer(e.target.value)}
               />
             </p>
