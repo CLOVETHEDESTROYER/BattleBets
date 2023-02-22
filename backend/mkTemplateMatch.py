@@ -6,16 +6,17 @@ from flask import Flask
 
 
 
+#image_path = os.path.join("assets", "superMiniDots.png")
 
 # Load the image you want to detect
-template = cv2.imread('backend/assets/dots12.jpg', cv2.IMREAD_GRAYSCALE)
-w, h = template.shape[::1]
+template = cv2.imread('/backend/assets/superMiniDots.png', cv2.IMREAD_GRAYSCALE)
+#w, h = template.shape[::-1]
 #template = cv2.resize(img,(20, 50), fx=1, fy=1)
 
 def Winner(Left, Right, notFound): 
     img = cv2.imread('backend/assets/dots12.jpg',0)
     template = cv2.imread('backend/assets/dot2.jpg',0)
-    #w, h = template.shape[::-1]
+    w, h = template.shape[::-1]
 
     #perform template matching
     res= cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)

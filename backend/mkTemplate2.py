@@ -132,5 +132,5 @@ if cv2.waitKey(1) == ord('q'):
              
 
     cap.release()
-    cv2.destroyAllWindows()
+cv2.destroyAllWindows()
 
