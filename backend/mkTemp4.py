@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 import json
-from flask import Flask
+from flask import Flask, Response
 
 app = Flask(__name__)
 
@@ -66,25 +66,30 @@ def winner():
             draw_rectangle(frame, left_region, (0, 0, 255))
             print("Left Side Wins")
             result = {"winner": "left"}
+
+            # Encode the resulting frame as JPEG
+            _, img_encoded = cv2.imencode('.jpg', frame)
+            response = img_encoded.tobytes()
             cap.release()
             cv2.destroyAllWindows()
-            return json.dumps(result)
+            return Response(response=response, status=200, content_type='image/jpeg')
         elif max_val_right > threshold:
             draw_rectangle(frame, right_region, (0, 0, 255))
             print("Right Side Wins")
             result = {"winner": "right"}
+
+            # Encode the resulting frame as JPEG
+            _, img_encoded = cv2.imencode('.jpg', frame)
+            response = img_encoded.tobytes()
             cap.release()
             cv2.destroyAllWindows()
-            return json.dumps(result)
+            return Response(response=response, status=200, content_type='image/jpeg')
         
-        cv2.imshow('frame',frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
     cap.release()
     cv2.destroyAllWindows()
     response = {"winner": "No Winner"}
     return json.dumps(response)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
