@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import os
 import json
+from flask import Flask
+
+app = Flask(__name__)
 
 # Load the template image
 template_path = os.path.join("backend", "assets", "superMiniDots.png")
@@ -35,7 +38,8 @@ def draw_rectangle(frame, region, color):
     x, y, w, h = region
     cv2.rectangle(frame, (x, y), (x + w, y + h), color, 7)
 
-def Winner():
+@app.route("/")
+def winner():
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -83,4 +87,4 @@ def Winner():
     return json.dumps(response)
 
 if __name__ == "__main__":
-    print(Winner())
+    app.run(debug=True, port=8000)
