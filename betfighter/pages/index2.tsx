@@ -37,25 +37,15 @@ const Home: NextPage = () => {
   //const [playerId, setPlayerId] = useState("")
   //const [placeBet, setPlaceBet] = useState("")
   
-  const winnerResponse = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/mk");
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return {};
-    }
-  };
-  
 //Components for connect Flask/NExt
-  const [data, setData] = useState({});
+  const [data, setData] = useState({})
 
   useEffect(() => {
     winnerResponse().then((test:any) => {
       console.log("a response test", test)
       setData(test)
     })
-  }, []);
+  }, [])
   
 
   return (

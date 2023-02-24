@@ -7,8 +7,11 @@ import numpy as np
 import os
 import json
 from flask import Flask, Response
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 class ImageProcessor:
     def __init__(self, template_path, detection_regions, threshold):
@@ -80,7 +83,7 @@ def winner():
             response = img_encoded.tobytes()
             cap.release()
             cv2.destroyAllWindows()
-            return Response(response=response, status=200, content_type='image/jpeg')
+            return Response(response=winner, status=200, content_type='image/jpeg')
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
