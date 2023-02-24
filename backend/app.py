@@ -22,7 +22,6 @@ def winner():
 
 
 @app.route('/testroute')
-@cross_origin(supports_credentials=True)
 def testroute():
     # You can make all of your routes here so they dont have to be in separate files. 
     print('inside open bet')
@@ -38,9 +37,13 @@ def winner():
 
 @app.route('/mk2', methods=['POST'])
 def mk():
-    
+    # Receive the image data from the frontend
+    data = request.json
+
+    # Here, you can process the image using OpenCV
+
     # Return the result as JSON
-    result = {'Winner': ["Member1", "Member2", "Member3", "CacaBallZ", "nalga", "assmane"]}
+    result = ({"winner": "No Winner"})
     return jsonify(result)
 
 

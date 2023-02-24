@@ -1,3 +1,7 @@
+#this version currently works but you must restart the program everytime and cant start it from the browser.  
+##Migrate to the mkTemp3.py
+
+
 import cv2
 import numpy as np
 import os
@@ -11,6 +15,8 @@ template_path = os.path.join("backend", "assets", "superMiniDots.png")
 template = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
 print(f"Template read status: {template is not None}")
 print(f"Template shape: {template.shape}")
+if template is None:
+            raise Exception("Could not load template image")
 
 # Resize image and template
 scale_percent = 60 # percent of original size
@@ -18,10 +24,6 @@ width = int(template.shape[1] * scale_percent / 100)
 height = int(template.shape[0] * scale_percent / 100)
 dim = (width, height)
 template = cv2.resize(template, dim, interpolation = cv2.INTER_AREA)
-
-# Define the detection region variables
-left_region = (0, 0, 422, 20)
-right_region = (480, 0, 580, 20)
 
 # Define the threshold value for detecting the template image
 threshold = 0.75
@@ -38,8 +40,9 @@ def draw_rectangle(frame, region, color):
     x, y, w, h = region
     cv2.rectangle(frame, (x, y), (x + w, y + h), color, 7)
 
-@app.route("/")
-def winner():
+@app.route("/mk")
+#the function now takes in the regions as parameters
+def winner(left_region=(0, 0, 422, 20), right_region=(480, 0, 580, 20)):
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -78,6 +81,8 @@ def winner():
             print("Right Side Wins")
             result = {"winner": "right"}
 
+            
+
             # Encode the resulting frame as JPEG
             _, img_encoded = cv2.imencode('.jpg', frame)
             response = img_encoded.tobytes()
@@ -85,10 +90,14 @@ def winner():
             cv2.destroyAllWindows()
             return Response(response=response, status=200, content_type='image/jpeg')
         
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+            
     cap.release()
     cv2.destroyAllWindows()
     response = {"winner": "No Winner"}
     return json.dumps(response)
+
 
 
 if __name__ == "__main__":
